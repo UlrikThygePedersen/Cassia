@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-import pandas as pd # type: ignore
+import pandas as pd  # type: ignore
 
 
 @dataclass
@@ -9,6 +9,7 @@ class Vessel:
     draught: float
     name: str
     dwt: float
+
 
 vessel_df = pd.read_csv("../assets/vessels.csv")
 
@@ -21,7 +22,6 @@ vessels_dispatcher = {
 }
 
 
-
 @dataclass
 class Port:
     name: str
@@ -30,16 +30,15 @@ class Port:
     approach_mllw_meters: float
 
 
-
 port_df = pd.read_csv("../assets/ports.csv")
 
 # create dispatcher for access to ports based on their UNLOCODE
 ports_dispatcher = {
-    row['UNLOCODE']: Port(
-        name=row['NAME'],
-        latitude=row['LATITUDE'],
-        longitude=row['LONGITUDE'],
-        approach_mllw_meters=row['APPROACH_MLLW_METERS']
+    row["UNLOCODE"]: Port(
+        name=row["NAME"],
+        latitude=row["LATITUDE"],
+        longitude=row["LONGITUDE"],
+        approach_mllw_meters=row["APPROACH_MLLW_METERS"],
     )
     for _, row in port_df.iterrows()
 }

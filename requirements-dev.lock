@@ -10,6 +10,8 @@
 -e file:.
 appnope==0.1.4
     # via ipykernel
+astral==3.2
+    # via ds-test-utp
 asttokens==2.4.1
     # via stack-data
 comm==0.2.2

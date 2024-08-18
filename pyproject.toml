@@ -5,7 +5,10 @@ description = "Add your description here"
 authors = [
     { name = "Ulrik Pedersen", email = "ulriktpedersen@nttdata.com" }
 ]
-dependencies = []
+dependencies = [
+    "pandas>=2.2.2",
+    "ipykernel>=6.29.5",
+]
 readme = "README.md"
 requires-python = ">= 3.8"
 
@@ -21,4 +24,4 @@ dev-dependencies = []
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/ds_test_utp"]
+packages = ["cassia"]

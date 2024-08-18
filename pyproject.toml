@@ -8,6 +8,8 @@ authors = [
 dependencies = [
     "pandas>=2.2.2",
     "ipykernel>=6.29.5",
+    "scipy>=1.14.0",
+    "matplotlib>=3.9.2",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"

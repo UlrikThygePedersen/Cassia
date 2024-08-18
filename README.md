@@ -1,4 +1,4 @@
-# Tidal and Daylight Window Forecasting API
+# Cassia - Tidal and Daylight Window Forecasting API
 This repository provides a solution for predicting tidal windows and combined tidal-daylight windows for vessels arriving at a port. The API calculates the time windows when a vessel can safely navigate to the port, considering both tidal variations and daylight restrictions.
 
 ## Overview

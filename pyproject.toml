@@ -11,6 +11,8 @@ dependencies = [
     "scipy>=1.14.0",
     "matplotlib>=3.9.2",
     "astral>=3.2",
+    "fastapi>=0.112.1",
+    "pydantic>=2.8.2",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"

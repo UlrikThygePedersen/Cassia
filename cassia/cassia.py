@@ -1,6 +1,5 @@
 import pandas as pd  # type:ignore
 
-
 from cassia.daylight import (
     get_daylight_windows_corrected,
     combine_tidal_and_daylight_windows,

@@ -1,42 +1,26 @@
-Disclaimer: Task below represents a similiar type of problems we are solving at PortLog. The task is simplified and anonymized for the purpose of this test.
+# Tidal and Daylight Window Forecasting API
+This repository provides a solution for predicting tidal windows and combined tidal-daylight windows for vessels arriving at a port. The API calculates the time windows when a vessel can safely navigate to the port, considering both tidal variations and daylight restrictions.
 
-# Forecast tidal window
+## Overview
+### Purpose
+The API is designed to help vessel operators determine the optimal time for vessels to enter a port and travel to a berth. It ensures safe navigation by accounting for both tidal variations and daylight availability, which are critical factors affecting a vessel's ability to enter the port.
 
-When can my vessel enter the port and travel until the berth?
+### Key Features
+* Tidal Window Calculation: Calculates the time windows when the water depth, considering tidal variations, is sufficient for a vessel to safely navigate to the port.
+* Combined Window Calculation: Combines tidal windows with daylight restrictions to provide a comprehensive view of when the vessel can navigate safely.
+* Visualization: Generates plots showing tidal variations, vessel draught, and the available navigation windows.
+## How It Works
+### Tidal Window Calculation
+The tidal window calculation is based on the following inputs:
 
-### Problem
+* Vessel Draught: The depth of water that the vessel occupies.
+* Port's Minimum Water Level: The base water depth at the port.
+* Tidal Forecast Data: Predicted tidal heights over time.
+The API calculates when the water depth (port's minimum level + tidal height) exceeds the vessel's draught, indicating a safe navigation window.
 
-#### Part 1
+Combined Tidal and Daylight Window Calculation
+In addition to the tidal windows, the API also considers daylight restrictions at the port. The combined windows are calculated by intersecting the tidal windows with the daylight windows, ensuring that the vessel can navigate during daylight hours.
 
-Consider the scenario of a marine vessel which is entering a port area and attempting to navigate to a safe berth, in order to load or discharge its cargo.
-
-At any time, a vessel will have a certain draught - the depth that the vessel is sitting in the water. Laden vessels will often have such a deep draught that, until they can reach a berth and begin to discharge their cargo, they will only be able to navigate safely at high tide. In other words, the port area will have a baseline water depth, and the height of the tide is added to this baseline to give the total water depth at any given time.
-
-Your task is to create a feature that will help a vessel operator know precisely when their vessel will be affected by tidal restrictions on arrival to the port.
-This feature should be in the form of a Python API. This API should accept the following request parameters:
-- The arrival port identifier
-- The vessel characteristics
-- The date and time of arrival
-
-In response, the API should return all the tidal windows for the next 14 days from the arrival time. That is, it should contain all the information needed to classify any time in the next 14 days from the arrival time as "in" or "out" of a tide window.
-
-**Note**: The tide data is already a forecast and is available for 14+ days ahead. In other words, **you do not need to predict the tides** - just use the tide forecast and the draught information to construct the tidal windows.
-
-##### Data
-
-The dataset `tide_heights.csv` contains, for several distinct ports, the highest and lowest points of each tide - it is up to you how to interpolate between these high and low points.
-
-In addition, you are provided with two other datasets: `ports.csv`, which contains information about each port in your tide dataset, and `vessels.csv`, which gives a list of example vessels to help you test your code.
-
-#### Part 2
-
-In addition to tidal restrictions, some ports also restrict passage through the port area during nighttime, due to the reduced visibility of potential hazards. In order for a vessel to be permitted to go to the berth, it needs to comply with both tidal and daylight restrictions.
-
-This time you are invited to find your own source of daylight information for each port, and create a second API which now returns the overall restriction windows for the next 14 days from the arrival time - combining both tidal and daylight restrictions.
-
-#### Part 3
-
-You've created the API - now to explain to the business side how the calculation works. Produce one or more charts with an example scenario of an arriving vessel to a port - displaying the tidal variation, the draught of the vessel, and the tidal or overall restrictions window clearly evident from the chart. The choice of visualization tool is up to you.
-
-### Solution
-Please publish the solution to your GitHub and invite `Zhuravld` and `lskrajny-marcura` to review it.
+API Endpoints
+/tidal-windows/: Provides tidal windows for a given vessel and port.
+/combined-windows/: Provides combined tidal and daylight windows for a given vessel and port.

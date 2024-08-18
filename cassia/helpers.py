@@ -1,4 +1,4 @@
-import pandas as pd #type:ignore
+import pandas as pd  # type:ignore
 
 
 def get_tide_data():

@@ -1,10 +1,5 @@
-import pandas as pd #type:ignore
-from scipy.interpolate import interp1d #type:ignore
-from astral import LocationInfo
-from astral.sun import sun
-from datetime import timedelta, datetime
-from typing import List, Tuple
-import matplotlib.pyplot as plt
+import pandas as pd  # type:ignore
+
 
 from cassia.daylight import (
     get_daylight_windows_corrected,
@@ -14,6 +9,7 @@ from cassia.daylight import (
 from cassia.dispatchers import ports_dispatcher, vessels_dispatcher
 from cassia.interpolation import calculate_tidal_windows
 from cassia.plotting import show_plot_tidal_windows, show_plot_combined_windows
+
 from cassia.helpers import get_tide_data
 
 
@@ -37,50 +33,6 @@ class Cassia:
             ports_dispatcher=self.ports_dispatcher,
             tide_heights_df=self.tide_heights_df,
         )
-
-    def get_daylight_windows(
-        self, unlocode: str, start_date: pd.Timestamp, days: int = 14
-    ) -> List[Tuple[pd.Timestamp, pd.Timestamp]]:
-        port = self.ports_dispatcher[unlocode]
-        location = LocationInfo(latitude=port.latitude, longitude=port.longitude)
-
-        daylight_windows = []
-
-        for i in range(days):
-            current_date = start_date + timedelta(days=i)
-            s = sun(location.observer, date=current_date.date())
-
-            sunrise = s["sunrise"].replace(tzinfo=None)
-            sunset = s["sunset"].replace(tzinfo=None)
-
-            if sunrise > sunset:
-                sunrise, sunset = sunset, sunrise
-
-            daylight_windows.append((sunrise, sunset))
-
-        return daylight_windows
-
-    def format_windows(
-        self, windows: List[Tuple[datetime, datetime]]
-    ) -> List[Tuple[pd.Timestamp, pd.Timestamp]]:
-        return [(pd.Timestamp(start), pd.Timestamp(end)) for start, end in windows]
-
-    def combine_windows(
-        self,
-        tidal_windows: List[Tuple[pd.Timestamp, pd.Timestamp]],
-        daylight_windows: List[Tuple[pd.Timestamp, pd.Timestamp]],
-    ) -> List[Tuple[pd.Timestamp, pd.Timestamp]]:
-        combined_windows = []
-
-        for tidal_start, tidal_end in tidal_windows:
-            for daylight_start, daylight_end in daylight_windows:
-                overlap_start = max(tidal_start, daylight_start)
-                overlap_end = min(tidal_end, daylight_end)
-
-                if overlap_start < overlap_end:
-                    combined_windows.append((overlap_start, overlap_end))
-
-        return combined_windows
 
     def get_combined_windows(
         self, imo: int, unlocode: str, arrival_time: pd.Timestamp, days: int = 14

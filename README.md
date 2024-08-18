@@ -18,9 +18,22 @@ The tidal window calculation is based on the following inputs:
 * Tidal Forecast Data: Predicted tidal heights over time.
 The API calculates when the water depth (port's minimum level + tidal height) exceeds the vessel's draught, indicating a safe navigation window.
 
+### Interpolation of Tidal Data
+The tidal heights provided in the forecast data are typically recorded at specific intervals (e.g., high and low tides). However, to accurately determine the water depth at any given minute over a 14-day period, interpolation is used.
+
+Here's how interpolation is applied:
+
+1. Data Preparation: The tidal data for the selected port is filtered and sorted by time. Each timestamp is converted into a numerical format (epoch time) for processing.
+
+2. Linear Interpolation: The interp1d function from the scipy.interpolate module is used to create a continuous function that estimates the tidal height at any given time between the provided data points. Linear interpolation is chosen to maintain a balance between simplicity and accuracy.
+
+Generating a Time Range: A time range covering the 14-day period from the vessel's arrival time is generated, with a resolution of 1 minute.
+
+Interpolating Tidal Heights: The interpolation function is applied to this time range to generate a continuous series of tidal heights for every minute.
+
+Calculating Total Depths: The interpolated tidal heights are added to the port's minimum water level to get the total water depth at each minute.
+
+Identifying Navigable Windows: The total water depth is compared against the vessel's draught to identify time windows where the vessel can safely navigate.
+
 Combined Tidal and Daylight Window Calculation
 In addition to the tidal windows, the API also considers daylight restrictions at the port. The combined windows are calculated by intersecting the tidal windows with the daylight windows, ensuring that the vessel can navigate during daylight hours.
-
-API Endpoints
-/tidal-windows/: Provides tidal windows for a given vessel and port.
-/combined-windows/: Provides combined tidal and daylight windows for a given vessel and port.

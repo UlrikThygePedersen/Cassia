@@ -2,7 +2,6 @@
 
 <img src="https://i.imgur.com/lYbRtT3.png" alt="cassia" width="900" height="420">
 
-<img src="https://imgur.com/qmGYqej.png" alt="noelle">
 
 This repository provides a solution for predicting tidal windows and combined tidal-daylight windows for vessels arriving at a port. The API calculates the time windows when a vessel can safely navigate to the port, considering both tidal variations and daylight restrictions.
 

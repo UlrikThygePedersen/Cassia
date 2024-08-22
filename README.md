@@ -110,9 +110,9 @@ cassia.plot_tidal_windows(
     unlocode=unlocode
 )
 ```
-![cassia](assets/cassia.png)
+![cassia](assets/plot_tidal_windows_example.png)
 
-<img src="assets/cassia.png" alt="cassia" width="900" height="420">
+<img src="assets/plot_tidal_windows_example.png" alt="cassia" width="900" height="420">
 
 
 

@@ -36,21 +36,17 @@ class Cassia:
     def get_combined_windows(
         self, imo: int, unlocode: str, arrival_time: pd.Timestamp, days: int = 14
     ):
-        # Calculate tidal windows
         tidal_windows, time_range, total_depths = self.get_tidal_windows(
             imo, unlocode, arrival_time
         )
 
-        # Get daylight windows
         port = self.ports_dispatcher[unlocode]
         daylight_windows = get_daylight_windows_corrected(
             port.latitude, port.longitude, arrival_time, days
         )
 
-        # Format daylight windows
         formatted_daylight_windows = format_windows(daylight_windows)
 
-        # Combine tidal and daylight windows
         combined_windows = combine_tidal_and_daylight_windows(
             tidal_windows, formatted_daylight_windows
         )

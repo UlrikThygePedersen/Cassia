@@ -43,7 +43,6 @@ def show_plot_combined_windows(
 ):
     plt.figure(figsize=(14, 7))
 
-    # Check for matching lengths between time_range and total_depths
     if len(time_range) != len(total_depths):
         raise ValueError("time_range and total_depths must have the same length.")
 
@@ -55,12 +54,10 @@ def show_plot_combined_windows(
         label=f"Vessel Draught ({vessel_draught} m)",
     )
 
-    # To avoid duplicate labels in the legend
     tidal_label_done = False
     daylight_label_done = False
     combined_label_done = False
 
-    # Highlight tidal windows
     for tidal_start, tidal_end in tidal_windows:
         if not tidal_label_done:
             plt.axvspan(
@@ -70,7 +67,6 @@ def show_plot_combined_windows(
         else:
             plt.axvspan(tidal_start, tidal_end, color="blue", alpha=0.2)
 
-    # Highlight daylight windows
     for daylight_start, daylight_end in daylight_windows:
         if not daylight_label_done:
             plt.axvspan(
@@ -84,7 +80,6 @@ def show_plot_combined_windows(
         else:
             plt.axvspan(daylight_start, daylight_end, color="yellow", alpha=0.2)
 
-    # Highlight combined navigable windows
     for combined_start, combined_end in combined_windows:
         if not combined_label_done:
             plt.axvspan(

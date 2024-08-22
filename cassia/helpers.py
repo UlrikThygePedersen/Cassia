@@ -1,10 +1,11 @@
 import pandas as pd  # type:ignore
 
 from pathlib import Path
+
 current_dir = Path(__file__).resolve().parent
 
 
-tide_heights_csv_path = current_dir / '../assets/tide_heights.csv'
+tide_heights_csv_path = current_dir / "../assets/tide_heights.csv"
 
 
 def get_tide_data():

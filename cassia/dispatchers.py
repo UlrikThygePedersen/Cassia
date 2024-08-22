@@ -4,12 +4,14 @@ import pandas as pd  # type: ignore
 
 from pathlib import Path
 
-# Get the path of the current file (dispatchers.py) using pathlib
+
 current_dir = Path(__file__).resolve().parent
 
-# Construct the paths to the CSV files
-vessels_csv_path = current_dir / '../assets/vessels.csv'
-ports_csv_path = current_dir / '../assets/ports.csv'
+vessels_csv_path = current_dir / "../assets/vessels.csv"
+ports_csv_path = current_dir / "../assets/ports.csv"
+vessel_df = pd.read_csv(vessels_csv_path.resolve())
+port_df = pd.read_csv(ports_csv_path.resolve())
+
 
 @dataclass
 class Vessel:
@@ -19,10 +21,6 @@ class Vessel:
     dwt: float
 
 
-# Read the CSV files using the resolved paths
-vessel_df = pd.read_csv(vessels_csv_path.resolve())
-
-# create dispatcher for easy access to info about the vessel based on IMO unique identifier
 vessels_dispatcher = {
     row["IMO"]: Vessel(
         imo=row["IMO"], draught=row["DRAUGHT"], name=row["NAME"], dwt=row["DWT"]
@@ -39,10 +37,6 @@ class Port:
     approach_mllw_meters: float
 
 
-# Read the ports CSV file
-port_df = pd.read_csv(ports_csv_path.resolve())
-
-# create dispatcher for access to ports based on their UNLOCODE
 ports_dispatcher = {
     row["UNLOCODE"]: Port(
         name=row["NAME"],

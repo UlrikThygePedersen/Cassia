@@ -90,6 +90,7 @@ An example scenario has been visualized and is available in the CassiaExample.ip
 * Tidal Windows Highlighted: Green shaded regions represent the time windows where the vessel can safely navigate based on tidal conditions.
 * Combined Tidal and Daylight Windows: Highlighted areas that show when both conditions are met.
 ### Code Examples of Visualizations
+Example for the simple tidal window
 
 ```python
 # Example usage of Brisbane with 01/03 2024 with the Epiphania ship
@@ -112,8 +113,28 @@ cassia.plot_tidal_windows(
 ```
 ![cassia](assets/plot_tidal_windows_example.png)
 
-<img src="assets/plot_tidal_windows_example.png" alt="cassia" width="900" height="420">
+Example for the combined tidal and sunlight window
 
+```python
+# Example usage of Brisbane with 01/03 2024 with the Epiphania ship
+arrival_time = pd.Timestamp('2024-03-01 00:00:00')
+imo = 9582116  # "EPIPHANIA"
+unlocode = 'AUBNE'  # Brisbane
+
+cassia = Cassia()
+
+cassia.get_combined_windows(
+    imo=imo, 
+    unlocode=unlocode, 
+    arrival_time=arrival_time
+)
+
+cassia.plot_combined_windows(
+    imo=imo, 
+    unlocode=unlocode
+)
+```
+![cassia](assets/plot_combined_windows_example.png)
 
 
 ## Conclusion

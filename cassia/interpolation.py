@@ -30,7 +30,7 @@ def calculate_tidal_windows(
         fill_value="extrapolate",
     )
 
-    time_range = pd.date_range(start=arrival_time, periods=14 * 24 * 60, freq="T")
+    time_range = pd.date_range(start=arrival_time, periods=14 * 24 * 60, freq="min")
     time_stamps = time_range.map(lambda x: x.timestamp())
     interpolated_tide_heights = interpolation_function(time_stamps)
 

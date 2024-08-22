@@ -89,10 +89,33 @@ An example scenario has been visualized and is available in the CassiaExample.ip
 * Overlay of Vessel Draught: Indicates the minimum water depth required for the vessel to navigate safely.
 * Tidal Windows Highlighted: Green shaded regions represent the time windows where the vessel can safely navigate based on tidal conditions.
 * Combined Tidal and Daylight Windows: Highlighted areas that show when both conditions are met.
-### How to Run the Visualization
-1. Open the CassiaExample.ipynb notebook in Jupyter.
-2. Run the notebook to generate the plots.
-3. The plots will show how the vessel's draught intersects with the tidal data and daylight restrictions, making the navigation windows clear.
+### Code Examples of Visualizations
+
+```python
+# Example usage of Brisbane with 01/03 2024 with the Epiphania ship
+arrival_time = pd.Timestamp('2024-03-01 00:00:00')
+imo = 9582116  # "EPIPHANIA"
+unlocode = 'AUBNE'  # Brisbane
+
+cassia = Cassia()
+
+tidal_windows = cassia.get_tidal_windows(
+    imo=imo,
+    unlocode=unlocode,
+    arrival_time=arrival_time
+)
+
+cassia.plot_tidal_windows(
+    imo=imo,
+    unlocode=unlocode
+)
+```
+![cassia](assets/cassia.png)
+
+<img src="assets/cassia.png" alt="cassia" width="900" height="420">
+
+
+
 ## Conclusion
 This API, along with the accompanying visualizations, provides a robust tool for predicting when a vessel can safely enter a port. By taking into account both tidal variations and daylight restrictions, the API ensures that vessel operators have the information they need to make safe and efficient decisions.
 

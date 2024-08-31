@@ -1,6 +1,9 @@
 # Forecast tidal window
 When can my vessel enter the port and travel until the berth?
 
+## Data
+The dataset tide_heights.csv contains, for several distinct ports, the highest and lowest points of each tide - it is up to you how to interpolate between these high and low points.
+
 ## Problem
 
 ### Part 1
@@ -17,9 +20,6 @@ Your task is to create a feature that will help a vessel operator know precisely
 In response, the API should return all the tidal windows for the next 14 days from the arrival time. That is, it should contain all the information needed to classify any time in the next 14 days from the arrival time as "in" or "out" of a tide window.
 
 Note: The tide data is already a forecast and is available for 14+ days ahead. In other words, you do not need to predict the tides - just use the tide forecast and the draught information to construct the tidal windows.
-
-## Data
-The dataset tide_heights.csv contains, for several distinct ports, the highest and lowest points of each tide - it is up to you how to interpolate between these high and low points.
 
 In addition, you are provided with two other datasets: ports.csv, which contains information about each port in your tide dataset, and vessels.csv, which gives a list of example vessels to help you test your code.
 
